@@ -63,7 +63,7 @@ class ProductController extends Controller
                     ->with('childrenCategories')
                     ->get();
                 return view('seller.product.products.create', compact('categories'));
-            }else {
+            } else {
                 flash(translate('Please upgrade your package.'))->warning();
                 return back();
             }
@@ -73,26 +73,6 @@ class ProductController extends Controller
             ->with('childrenCategories')
             ->get();
         return view('seller.product.products.create', compact('categories'));
-    }
-    public function ServiceCreate(Request $request) {
-        
-        if (addon_is_activated('seller_subscription')) {
-            if (seller_package_validity_check()) {
-                $categories = Category::where('parent_id', 0)
-                    ->where('digital', 0)
-                    ->with('childrenCategories')
-                    ->get();
-                return view('seller.product.services.create', compact('categories'));
-            }else {
-                flash(translate('Please upgrade your package.'))->warning();
-                return back();
-            }
-        }
-        $categories = Category::where('parent_id', 0)
-            ->where('digital', 0)
-            ->with('childrenCategories')
-            ->get();
-        return view('seller.product.services.create', compact('categories'));
     }
 
     public function store(ProductRequest $request)
@@ -151,24 +131,6 @@ class ProductController extends Controller
             ->with('childrenCategories')
             ->get();
         return view('seller.product.products.edit', compact('product', 'categories', 'tags', 'lang'));
-    }
-
-    public function ServiceEdit(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-
-        if (Auth::user()->id != $product->user_id) {
-            flash(translate('This product is not yours.'))->warning();
-            return back();
-        }
-
-        $lang = $request->lang;
-        $tags = json_decode($product->tags);
-        $categories = Category::where('parent_id', 0)
-            ->where('digital', 0)
-            ->with('childrenCategories')
-            ->get();
-        return view('seller.product.services.edit', compact('product', 'categories', 'tags', 'lang'));
     }
 
     public function update(ProductRequest $request, Product $product)

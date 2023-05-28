@@ -738,7 +738,7 @@ fixed-bottom 1030*/
 }
 .bg-black,
 .hov-bg-black:hover {
-    background-color: #041a11 !important;
+    background-color: #17171f !important;
 }
 .bg-soft-light,
 .hov-bg-soft-light:hover {
@@ -926,7 +926,7 @@ hr {
 }
 .text-secondary,
 .hov-text-secondary:hover {
-    color: #f15a24 !important;
+    color: var(--secondary) !important;
 }
 .text-soft-secondary,
 .hov-text-soft-secondary:hover {
@@ -11085,6 +11085,7 @@ ul.apps a:hover i{
 
 /* Custom */
 .home-slider {
+    width: 100% !important;
     max-width: 100% !important;
 }
 .hov-svg-white > svg *,

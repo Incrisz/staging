@@ -41,6 +41,12 @@ return
             ],
             'yahei' => [
                 'R'  => 'chinese-msyh.ttf',    // regular font
+            ],
+            'pyidaungsu' => [
+                'R'  => 'Pyidaungsu.ttf',    // regular font
+            ],
+            'zawgyi-one' => [
+                'R'  => 'Zawgyi-One.ttf',    // regular font
             ]
         ]
     ];

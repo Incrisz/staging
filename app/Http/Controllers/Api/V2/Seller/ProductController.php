@@ -52,7 +52,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category')->where('user_id', auth()->user()->id)->paginate(10);
+        $products = Product::where('user_id', auth()->user()->id)->where('digital', 0)->where('auction_product', 0)->where('wholesale_product', 0)->orderBy('created_at', 'desc');
+        $products = $products->paginate(10);
         return new ProductCollection($products);
     }
 

@@ -45,7 +45,7 @@ class HomeController extends Controller
         });
 
         $todays_deal_products = Cache::rememberForever('todays_deal_products', function () {
-            return filter_products(Product::where('published', 1)->where('todays_deal', '1'))->get();
+            return filter_products(Product::where('todays_deal', '1'))->get();
         });
 
         $newest_products = Cache::remember('newest_products', 3600, function () {
@@ -245,6 +245,10 @@ class HomeController extends Controller
         $detailedProduct  = Product::with('reviews', 'brand', 'stocks', 'user', 'user.shop')->where('auction_product', 0)->where('slug', $slug)->where('approved', 1)->first();
 
         if ($detailedProduct != null && $detailedProduct->published) {
+
+            if(!addon_is_activated('wholesale') && $detailedProduct->wholesale_product == 1){
+                abort(404);
+            }
 
             $product_queries = ProductQuery::where('product_id', $detailedProduct->id)->where('customer_id', '!=', Auth::id())->latest('id')->paginate(3);
             $total_query = ProductQuery::where('product_id', $detailedProduct->id)->count();
@@ -688,7 +692,7 @@ class HomeController extends Controller
     public function todays_deal()
     {
         $todays_deal_products = Cache::rememberForever('todays_deal_products', function () {
-            return filter_products(Product::where('published', 1)->where('todays_deal', '1'))->get();
+            return filter_products(Product::where('todays_deal', '1'))->get();
         });
 
         return view("frontend.todays_deal", compact('todays_deal_products'));

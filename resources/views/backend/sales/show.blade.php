@@ -17,6 +17,7 @@
                 @endphp
 
                 <!--Assign Delivery Boy-->
+                @if ($order->seller_id == $admin_user_id || get_setting('product_manage_by_admin') == 1)
                     
                     @if (addon_is_activated('delivery_boy'))
                         <div class="col-md-3 ml-auto">
@@ -90,7 +91,7 @@
                         <input type="text" class="form-control" id="update_tracking_code"
                             value="{{ $order->tracking_code }}">
                     </div>
-             
+                @endif
             </div>
             <div class="mb-3">
                 @php

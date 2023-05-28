@@ -1,14 +1,7 @@
 <?php
+namespace App\Http\Controllers\Api\V2\Seller;
 
-use App\Http\Controllers\Api\V2\Seller\ConversationController;
-use App\Http\Controllers\Api\V2\Seller\CouponController;
-use App\Http\Controllers\Api\V2\Seller\OrderController;
-use App\Http\Controllers\Api\V2\Seller\ProductController;
-use App\Http\Controllers\Api\V2\Seller\ShopController;
-use App\Http\Controllers\Api\V2\Seller\RefundController;
-use App\Http\Controllers\Api\V2\Seller\SellerPackageController;
-use App\Http\Controllers\Api\V2\Seller\WithdrawRequestController;
-use App\Http\Controllers\Api\V2\Seller\SellerFileUploadController;
+use Route;
 
 Route::group(['prefix' => 'v2/seller', 'middleware' => ['app_language', 'auth:sanctum']], function () {
     //Order Section
@@ -68,6 +61,14 @@ Route::group(['prefix' => 'v2/seller', 'middleware' => ['app_language', 'auth:sa
         Route::get('products/reviews', 'product_reviews');
 
         Route::get('products/search', 'search');
+    });
+     //Whole Sale Product Section
+    Route::controller(WholesaleProductController::class)->group(function () {
+        Route::get('wholesale-products', 'wholesale_products');
+        Route::post('wholesale-product/create', 'product_store');
+        Route::get('wholesale-product/edit/{id}', 'product_edit');
+        Route::post('wholesale-product/update/{id}', 'product_update');
+        Route::get('wholesale-product/destroy/{id}', 'product_destroy');        
     });
 
     //Coupon Section

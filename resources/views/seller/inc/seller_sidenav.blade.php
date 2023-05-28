@@ -43,18 +43,18 @@
                             </a>
                         </li>
 
-                        <!-- <li class="aiz-side-nav-item">
+                        <li class="aiz-side-nav-item">
                             <a href="{{ route('seller.product_bulk_upload.index') }}"
                                 class="aiz-side-nav-link {{ areActiveRoutes(['product_bulk_upload.index']) }}">
                                 <span class="aiz-side-nav-text">{{ translate('Product Bulk Upload') }}</span>
                             </a>
-                        </li> -->
-                        <!-- <li class="aiz-side-nav-item">
+                        </li>
+                        <li class="aiz-side-nav-item">
                             <a href="{{ route('seller.digitalproducts') }}"
                                 class="aiz-side-nav-link {{ areActiveRoutes(['seller.digitalproducts', 'seller.digitalproducts.create', 'seller.digitalproducts.edit']) }}">
                                 <span class="aiz-side-nav-text">{{ translate('Digital Products') }}</span>
                             </a>
-                        </li> -->
+                        </li>
                         <li class="aiz-side-nav-item">
                             <a href="{{ route('seller.reviews') }}"
                                 class="aiz-side-nav-link {{ areActiveRoutes(['seller.reviews']) }}">
@@ -63,13 +63,13 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="aiz-side-nav-item">
+                <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.uploaded-files.index') }}"
                         class="aiz-side-nav-link {{ areActiveRoutes(['seller.uploaded-files.index', 'seller.uploads.create']) }}">
                         <i class="las la-folder-open aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">{{ translate('Uploaded Files') }}</span>
                     </a>
-                </li> -->
+                </li>
                 @if (addon_is_activated('seller_subscription'))
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
@@ -164,21 +164,21 @@
                 @endif
 
 
-                <!-- <li class="aiz-side-nav-item">
+                <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.shop.index') }}"
                         class="aiz-side-nav-link {{ areActiveRoutes(['seller.shop.index']) }}">
                         <i class="las la-cog aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">{{ translate('Shop Setting') }}</span>
                     </a>
-                </li> -->
+                </li>
 
-                <!-- <li class="aiz-side-nav-item">
+                <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.payments.index') }}"
                         class="aiz-side-nav-link {{ areActiveRoutes(['seller.payments.index']) }}">
                         <i class="las la-history aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">{{ translate('Payment History') }}</span>
                     </a>
-                </li> -->
+                </li>
 
                 <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.money_withdraw_requests.index') }}"
@@ -188,12 +188,12 @@
                     </a>
                 </li>
 
-                <!-- <li class="aiz-side-nav-item">
+                <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.commission-history.index') }}" class="aiz-side-nav-link">
                         <i class="las la-file-alt aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">{{ translate('Commission History') }}</span>
                     </a>
-                </li> -->
+                </li>
 
                 @if (get_setting('conversation_system') == 1)
                     @php
@@ -230,7 +230,7 @@
                         ->where('user_id', Auth::user()->id)
                         ->count();
                 @endphp
-                <!-- <li class="aiz-side-nav-item">
+                <li class="aiz-side-nav-item">
                     <a href="{{ route('seller.support_ticket.index') }}"
                         class="aiz-side-nav-link {{ areActiveRoutes(['seller.support_ticket.index']) }}">
                         <i class="las la-atom aiz-side-nav-icon"></i>
@@ -239,7 +239,7 @@
                             <span class="badge badge-inline badge-success">{{ $support_ticket }}</span>
                         @endif
                     </a>
-                </li> -->
+                </li>
 
             </ul><!-- .aiz-side-nav -->
         </div><!-- .aiz-side-nav-wrap -->

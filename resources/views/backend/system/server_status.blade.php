@@ -39,9 +39,9 @@
                                 @endphp
                                 {{ $mysql_version }}
                             </td>
-                            <td>5.6+</td>
+                            <td>10.0+</td>
                             <td>
-                                @if (floatval(explode("-",$mysql_version)[0]) >= 5.6)
+                                @if (floatval(explode("-",$mysql_version)[0]) >= 10.0)
                                 <i class="las la-check text-success"></i>
                                 @else
                                 <i class="las la-times text-danger"></i>

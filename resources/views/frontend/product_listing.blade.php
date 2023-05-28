@@ -147,7 +147,6 @@
                                 
                                 <!-- Attributes -->
                                 @foreach ($attributes as $attribute)
-                                @if ($attribute->name != 'school')
                                     <div class="bg-white border mb-3">
                                         <div class="fs-16 fw-700 p-3">
                                             <a href="#" class="dropdown-toggle text-dark filter-section collapsed d-flex align-items-center justify-content-between" 
@@ -180,7 +179,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                                 @endforeach
                                     
                                 <!-- Color -->
@@ -228,21 +226,21 @@
                         
                         <!-- Breadcrumb -->
                         <ul class="breadcrumb bg-transparent py-0 px-1">
-                            <li class="breadcrumb-item opacity-50">
+                            <li class="breadcrumb-item has-transition opacity-50 hov-opacity-100">
                                 <a class="text-reset" href="{{ route('home') }}">{{ translate('Home')}}</a>
                             </li>
                             @if(!isset($category_id))
                                 <li class="breadcrumb-item fw-700  text-dark">
-                                    <a class="text-reset" href="{{ route('search') }}">"{{ translate('All Categories')}}"</a>
+                                    "{{ translate('All Categories')}}"
                                 </li>
                             @else
-                                <li class="breadcrumb-item opacity-50">
+                                <li class="breadcrumb-item opacity-50 hov-opacity-100">
                                     <a class="text-reset" href="{{ route('search') }}">{{ translate('All Categories')}}</a>
                                 </li>
                             @endif
                             @if(isset($category_id))
                                 <li class="text-dark fw-600 breadcrumb-item">
-                                    <a class="text-reset" href="{{ route('products.category', \App\Models\Category::find($category_id)->slug) }}">"{{ \App\Models\Category::find($category_id)->getTranslation('name') }}"</a>
+                                    "{{ \App\Models\Category::find($category_id)->getTranslation('name') }}"
                                 </li>
                             @endif
                         </ul>
@@ -277,7 +275,7 @@
                                         </select>
                                     @endif
                                 </div>
-                                <!-- <div class="col-6 col-lg-auto mb-3 w-lg-200px">
+                                <div class="col-6 col-lg-auto mb-3 w-lg-200px">
                                     <select class="form-control form-control-sm aiz-selectpicker rounded-0" name="sort_by" onchange="filter()">
                                         <option value="">{{ translate('Sort by')}}</option>
                                         <option value="newest" @isset($sort_by) @if ($sort_by == 'newest') selected @endif @endisset>{{ translate('Newest')}}</option>
@@ -285,29 +283,13 @@
                                         <option value="price-asc" @isset($sort_by) @if ($sort_by == 'price-asc') selected @endif @endisset>{{ translate('Price low to high')}}</option>
                                         <option value="price-desc" @isset($sort_by) @if ($sort_by == 'price-desc') selected @endif @endisset>{{ translate('Price high to low')}}</option>
                                     </select>
-                                </div> -->
-                                <div class="col-12 col-lg-6 col-md-6 mb-3 w-lg-200px  ">
-                                        @foreach ($attributes as $attribute)
-                                            @if ($attribute->name == 'school')
-                                                <select class="form-control form-control-sm aiz-selectpicker rounded-0" name="selected_attribute_values[]" onchange="filter()">
-                                                 <option value="" disabled selected > Select My School </option>
-                                                    @foreach ($attribute->attribute_values as $attribute_value)
-                                                        <option value="{{ $attribute_value->value }}" @if (in_array($attribute_value->value, $selected_attribute_values)) selected @endif>
-                                                            {{ $attribute_value->value }}
-                                                        </option>                                    
-                                                    @endforeach
-                                                </select>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                              
-
-
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Products -->
-                        
-                        <div class="px-3" >
-                            <div class="row gutters-16 row-cols-xxl-4 row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-2 border-top border-left">
+                        <div class="px-3">
+                            <div class="row gutters-16 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-4 row-cols-md-3 row-cols-2 border-top border-left">
                                 @foreach ($products as $key => $product)
                                     <div class="col border-right border-bottom has-transition hov-shadow-out z-1">
                                         @include('frontend.partials.product_box_1',['product' => $product])
@@ -315,7 +297,6 @@
                                 @endforeach
                             </div>
                         </div>
-                        
                         <div class="aiz-pagination mt-4">
                             {{ $products->appends(request()->input())->links() }}
                         </div>

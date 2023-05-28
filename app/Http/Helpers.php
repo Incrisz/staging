@@ -92,18 +92,21 @@ if (!function_exists('convert_to_kes')) {
 if (!function_exists('filter_products')) {
     function filter_products($products)
     {
+
+        $products = $products->where('published', '1')->where('auction_product', 0)->where('approved', '1');
+
+        if (!addon_is_activated('wholesale')) {
+            $products = $products->where('wholesale_product', 0);
+        }
         $verified_sellers = verified_sellers_id();
         if (get_setting('vendor_system_activation') == 1) {
-            return $products->where('approved', '1')
-                ->where('published', '1')
-                ->where('auction_product', 0)
-                ->where(function ($p) use ($verified_sellers) {
-                    $p->where('added_by', 'admin')->orWhere(function ($q) use ($verified_sellers) {
-                        $q->whereIn('user_id', $verified_sellers);
+            return $products->where(function ($p) use ($verified_sellers) {
+                        $p->where('added_by', 'admin')->orWhere(function ($q) use ($verified_sellers) {
+                            $q->whereIn('user_id', $verified_sellers);
+                        });
                     });
-                });
         } else {
-            return $products->where('published', '1')->where('auction_product', 0)->where('added_by', 'admin');
+            return $products->where('added_by', 'admin');
         }
     }
 }
@@ -112,29 +115,11 @@ if (!function_exists('filter_products')) {
 if (!function_exists('get_cached_products')) {
     function get_cached_products($category_id = null)
     {
-        $products = \App\Models\Product::where('published', 1)->where('approved', '1')->where('auction_product', 0);
-        $verified_sellers = verified_sellers_id();
-        if (get_setting('vendor_system_activation') == 1) {
-            $products = $products->where(function ($p) use ($verified_sellers) {
-                $p->where('added_by', 'admin')->orWhere(function ($q) use ($verified_sellers) {
-                    $q->whereIn('user_id', $verified_sellers);
-                });
-            });
-        } else {
-            $products = $products->where('added_by', 'admin');
-        }
-
-        if ($category_id != null) {
-            return Cache::remember('products-category-' . $category_id, 86400, function () use ($category_id, $products) {
-                $category_ids = CategoryUtility::children_ids($category_id);
-                $category_ids[] = $category_id;
-                return $products->whereIn('category_id', $category_ids)->latest()->take(12)->get();
-            });
-        } else {
-            return Cache::remember('products', 86400, function () use ($products) {
-                return $products->latest()->take(12)->get();
-            });
-        }
+        return Cache::remember('products-category-' . $category_id, 86400, function () use ($category_id) {
+            $category_ids = CategoryUtility::children_ids($category_id);
+            $category_ids[] = $category_id;
+            return filter_products(Product::whereIn('category_id', $category_ids))->latest()->take(5)->get();
+        });
     }
 }
 
@@ -740,7 +725,7 @@ if (!function_exists('home_discounted_base_price')) {
         }
         $price += $tax;
 
-        
+
         return $formatted ? format_price(convert_price($price)) : convert_price($price);
     }
 }
@@ -817,27 +802,26 @@ function remove_invalid_charcaters($str)
 if (!function_exists('translation_tables')) {
     function translation_tables($uniqueIdentifier)
     {
-        $noTableAddons =  ['african_pg','paytm','pos_system'];
-        if (!in_array($uniqueIdentifier, $noTableAddons)){ 
+        $noTableAddons =  ['african_pg', 'paytm', 'pos_system'];
+        if (!in_array($uniqueIdentifier, $noTableAddons)) {
             $addons = [];
-            $addons['affiliate'] = ['affiliate_options','affiliate_configs','affiliate_users','affiliate_payments', 'affiliate_withdraw_requests','affiliate_logs', 'affiliate_stats'];
+            $addons['affiliate'] = ['affiliate_options', 'affiliate_configs', 'affiliate_users', 'affiliate_payments', 'affiliate_withdraw_requests', 'affiliate_logs', 'affiliate_stats'];
             $addons['auction'] = ['auction_product_bids'];
-            $addons['club_point'] = ['club_points','club_point_details'];
-            $addons['delivery_boy'] = ['delivery_boys','delivery_histories','delivery_boy_payments','delivery_boy_collections'];
+            $addons['club_point'] = ['club_points', 'club_point_details'];
+            $addons['delivery_boy'] = ['delivery_boys', 'delivery_histories', 'delivery_boy_payments', 'delivery_boy_collections'];
             $addons['offline_payment'] = ['manual_payment_methods'];
-            $addons['otp_system'] = ['otp_configurations','sms_templates'];
+            $addons['otp_system'] = ['otp_configurations', 'sms_templates'];
             $addons['refund_request'] = ['refund_requests'];
-            $addons['seller_subscription'] = ['seller_packages','seller_package_translations','seller_package_payments'];
+            $addons['seller_subscription'] = ['seller_packages', 'seller_package_translations', 'seller_package_payments'];
             $addons['wholesale'] = ['wholesale_prices'];
 
-            foreach($addons as $key => $addon_tables){
-                if($key == $uniqueIdentifier){
-                    foreach($addon_tables as $table)
-                    {
+            foreach ($addons as $key => $addon_tables) {
+                if ($key == $uniqueIdentifier) {
+                    foreach ($addon_tables as $table) {
                         Schema::dropIfExists($table);
                     }
                 }
-            }  
+            }
         }
     }
 }
@@ -983,7 +967,7 @@ if (!function_exists('seller_base_carrier_list')) {
 
 function timezones()
 {
-    return Array(
+    return array(
         '(GMT-12:00) International Date Line West' => 'Pacific/Kwajalein',
         '(GMT-11:00) Midway Island' => 'Pacific/Midway',
         '(GMT-11:00) Samoa' => 'Pacific/Apia',
@@ -1127,7 +1111,7 @@ function timezones()
         '(GMT+12:00) Marshall Is.' => 'Pacific/Fiji',
         '(GMT+12:00) Wellington' => 'Pacific/Auckland',
         '(GMT+13:00) Nuku\'alofa' => 'Pacific/Tongatapu'
-);
+    );
 }
 
 if (!function_exists('app_timezone')) {

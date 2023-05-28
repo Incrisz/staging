@@ -88,7 +88,9 @@ class ProductDetailCollection extends ResourceCollection
                     'description' => $data->getTranslation('description'),
                     'video_link' => $data->video_link != null ?  $data->video_link : "",
                     'brand' => $brand,
-                    'link' => route('product', $data->slug)
+                    'link' => route('product', $data->slug),
+                    'wholesale' => ProductWholesaleResource::collection($data->stocks->first()->wholesalePrices),
+
                 ];
             })
         ];

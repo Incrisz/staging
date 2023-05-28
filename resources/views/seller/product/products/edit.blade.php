@@ -31,7 +31,7 @@
             @csrf
             <input type="hidden" name="added_by" value="seller">
             <div class="card">
-                <!-- <ul class="nav nav-tabs nav-fill border-light">
+                <ul class="nav nav-tabs nav-fill border-light">
                     @foreach (\App\Models\Language::all() as $key => $language)
                     <li class="nav-item">
                         <a class="nav-link text-reset @if ($language->code == $lang) active @else bg-soft-dark border-light border-left-0 @endif py-3"
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     @endforeach
-                </ul> -->
+                </ul>
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-lg-3 col-from-label">{{translate('Product Name')}}</label>
@@ -100,7 +100,7 @@
                                 required>
                         </div>
                     </div>
-                    <div class="form-group row" style="display:none;">
+                    <div class="form-group row">
                         <label class="col-lg-3 col-from-label">{{translate('Tags')}}</label>
                         <div class="col-lg-8">
                             <input type="text" class="form-control aiz-tag-input" name="tags[]" id="tags"
@@ -214,7 +214,7 @@
             </div> --}}
         </div>
     </div>
-    <div class="card" style="display:none;">
+    <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('Product Videos')}}</h5>
         </div>
@@ -247,7 +247,7 @@
             <h5 class="mb-0 h6">{{translate('Product Variation')}}</h5>
         </div>
         <div class="card-body">
-            <div class="form-group row" style="display:none;">
+            <div class="form-group row">
                 <div class="col-lg-3">
                     <input type="text" class="form-control" value="{{translate('Colors')}}" disabled>
                 </div>
@@ -309,7 +309,7 @@
                                 </option>
                             @endforeach
                         </select>
-                         <input type="text" class="form-control aiz-tag-input" name="choice_options_{{ $choice_option->attribute_id }}[]" placeholder="{{ translate('Enter choice values') }}" value="{{ implode(',', $choice_option->values) }}" data-on-change="update_sku"> 
+                        {{-- <input type="text" class="form-control aiz-tag-input" name="choice_options_{{ $choice_option->attribute_id }}[]" placeholder="{{ translate('Enter choice values') }}" value="{{ implode(',', $choice_option->values) }}" data-on-change="update_sku"> --}}
                     </div>
                 </div>
                 @endforeach
@@ -365,13 +365,11 @@
                 <div class="form-group row">
                     <label class="col-lg-3 col-from-label">{{translate('Quantity')}}</label>
                     <div class="col-lg-6">
-                
                         <input type="number" lang="en" value="{{ $product->stocks->first()->qty }}" step="1"
                             placeholder="{{translate('Quantity')}}" name="current_stock" class="form-control">
-        
                     </div>
                 </div>
-                <div class="form-group row" style="display:none;">
+                <div class="form-group row">
                     <label class="col-md-3 col-from-label">
                         {{translate('SKU')}}
                     </label>
@@ -382,14 +380,14 @@
             </div>
             <div class="form-group row">
                 <label class="col-md-3 col-from-label">
-                    {{translate('School Name')}}
+                    {{translate('External link')}}
                 </label>
                 <div class="col-md-9">
-                    <input type="text" placeholder="{{ translate('e.g. Futmx') }}" name="external_link" value="{{ $product->external_link }}" class="form-control">
-                    <small class="text-muted">{{translate('Leave it blank if you are not a student')}}</small>
+                    <input type="text" placeholder="{{ translate('External link') }}" name="external_link" value="{{ $product->external_link }}" class="form-control">
+                    <small class="text-muted">{{translate('Leave it blank if you do not use external site link')}}</small>
                 </div>
             </div>
-            <div class="form-group row" style="display:none;">
+            <div class="form-group row">
                 <label class="col-md-3 col-from-label">
                     {{translate('External link button text')}}
                 </label>
@@ -419,8 +417,8 @@
         </div>
     </div>
 
-    <div class="card" style="display:none;">
-        <div class="card-header" >
+    <div class="card">
+        <div class="card-header">
             <h5 class="mb-0 h6">{{translate('PDF Specification')}}</h5>
         </div>
         <div class="card-body">
@@ -441,7 +439,7 @@
             </div>
         </div>
     </div>
-    <div class="card" style="display:none;">
+    <div class="card">
         <div class="card-header">
             <h5 class="mb-0 h6">{{translate('SEO Meta Tags')}}</h5>
         </div>
@@ -552,7 +550,7 @@
             </div>
         </div>
 
-        <div class="card" style="display:none;">
+        <div class="card">
             <div class="card-header">
                 <h5 class="mb-0 h6">
                     {{translate('Stock Visibility State')}}
@@ -597,7 +595,7 @@
             </div>
         </div>
 
-        <div class="card" style="display:none;">
+        <div class="card">
             <div class="card-header">
                 <h5 class="mb-0 h6">{{translate('Cash On Delivery')}}</h5>
             </div>

@@ -60,7 +60,7 @@ class SupportTicketController extends Controller
     {
         //dd();
         $ticket = new Ticket;
-        $ticket->code = max(100000, (Ticket::latest()->first() != null ? Ticket::latest()->first()->code + 1 : 0)).date('s');
+        $ticket->code = strtotime(date('Y-m-d H:i:s')).Auth::user()->id;
         $ticket->user_id = Auth::user()->id;
         $ticket->subject = $request->subject;
         $ticket->details = $request->details;

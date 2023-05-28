@@ -66,13 +66,13 @@
                     </div>
                 @endif 
                 <div class="row">
-                    <label class="col-md-2 col-form-label">{{ translate('Shop Name') }}<span class="text-danger text-danger">*</span></label>
+                    <label class="col-md-2 col-form-label">{{ translate('Meta Title') }}<span class="text-danger text-danger">*</span></label>
                     <div class="col-md-10">
                         <input type="text" class="form-control mb-3" placeholder="{{ translate('Meta Title')}}" name="meta_title" value="{{ $shop->meta_title }}" required>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-md-2 col-form-label">{{ translate('Shop Description') }}<span class="text-danger text-danger">*</span></label>
+                    <label class="col-md-2 col-form-label">{{ translate('Meta Description') }}<span class="text-danger text-danger">*</span></label>
                     <div class="col-md-10">
                         <textarea name="meta_description" rows="3" class="form-control mb-3" required>{{ $shop->meta_description }}</textarea>
                     </div>

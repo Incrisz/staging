@@ -19,7 +19,7 @@ use custom-style.css
     --white: #fff;
     --gray: #6c757d;
     --gray-dark: #343a40;
-    --primary: #1b4332;
+    --primary: #2E294E;
     --hov-primary: #2E294E;
     --soft-primary: rgba(233, 233, 240, 1);
     --secondary: #8f97ab;
@@ -3803,9 +3803,9 @@ input[type="number"] {
 .aiz-side-nav-logo-wrap img {
     height: 31px;
 }
-/* .aiz-side-nav-logo-wrap {
+.aiz-side-nav-logo-wrap {
     background-color: var(--soft-primary);
-} */
+}
 
 .aiz-side-nav-wrap {
     padding: 15px 0;

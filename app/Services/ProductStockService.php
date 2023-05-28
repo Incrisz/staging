@@ -18,7 +18,7 @@ class ProductStockService
         $combinations = (new CombinationService())->generate_combination($options);
         
         $variant = '';
-        if (!empty($combinations) && count($combinations[0]) > 0) {
+        if (count($combinations) > 0) {
             $product->variant_product = 1;
             $product->save();
             foreach ($combinations as $key => $combination) {

@@ -16,7 +16,7 @@ class KhaltiController extends Controller
             $amount = $combined_order->grand_total;
         } elseif ($request->payment_type == 'wallet_payment') {
             $amount = $request->amount;
-            $purchase_order_id = auth()->id();
+            $purchase_order_id = $request->user_id;
         } elseif ($request->payment_type == 'seller_package_payment' || $request->payment_type == 'customer_package_payment') {
             $amount = $request->amount;
             $purchase_order_id = $request->package_id;

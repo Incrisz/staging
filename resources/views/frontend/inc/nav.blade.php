@@ -76,13 +76,13 @@
                 <ul class="list-inline mb-0 h-100 d-flex justify-content-end align-items-center">
                     @if (get_setting('vendor_system_activation') == 1)
                         <!-- Become a Seller -->
-                        <!-- <li class="list-inline-item mr-0 pl-0 py-2">
+                        <li class="list-inline-item mr-0 pl-0 py-2">
                             <a href="{{ route('shops.create') }}" class="text-secondary fs-12 pr-3 d-inline-block border-width-2 border-right">{{ translate('Become a Seller !')}}</a>
-                        </li> -->
+                        </li>
                         <!-- Seller Login -->
-                        <!-- <li class="list-inline-item mr-0 pl-0 py-2">
+                        <li class="list-inline-item mr-0 pl-0 py-2">
                             <a href="{{ route('seller.login') }}" class="text-secondary fs-12 pl-3 d-inline-block">{{ translate('Login to Seller')}}</a>
-                        </li> -->
+                        </li>
                     @endif
                     @if (get_setting('helpline_number'))
                         <!-- Helpline -->
@@ -143,7 +143,7 @@
                                 <div class="search-input-box">
                                     <input type="text" class="border border-soft-light form-control fs-14 hov-animate-outline" id="search" name="keyword" @isset($query)
                                         value="{{ $query }}"
-                                    @endisset placeholder="{{translate('I dey find ...')}}" autocomplete="off">
+                                    @endisset placeholder="{{translate('I am shopping for...')}}" autocomplete="off">
 
                                     <svg id="Group_723" data-name="Group 723" xmlns="http://www.w3.org/2000/svg" width="20.001" height="20" viewBox="0 0 20.001 20">
                                         <path id="Path_3090" data-name="Path 3090" d="M9.847,17.839a7.993,7.993,0,1,1,7.993-7.993A8,8,0,0,1,9.847,17.839Zm0-14.387a6.394,6.394,0,1,0,6.394,6.394A6.4,6.4,0,0,0,9.847,3.453Z" transform="translate(-1.854 -1.854)" fill="#b5b5bf"/>
@@ -174,17 +174,17 @@
                     </div>
                 </div>
                 <!-- Compare -->
-                <!-- <div class="d-none d-lg-block ml-3 mr-0">
+                <div class="d-none d-lg-block ml-3 mr-0">
                     <div class="" id="compare">
                         @include('frontend.partials.compare')
                     </div>
-                </div> -->
+                </div>
                 <!-- Wishlist -->
-                <!-- <div class="d-none d-lg-block mr-3" style="margin-left: 36px;">
+                <div class="d-none d-lg-block mr-3" style="margin-left: 36px;">
                     <div class="" id="wishlist">
                         @include('frontend.partials.wishlist')
                     </div>
-                </div> -->
+                </div>
                 @if(!isAdmin())
                 <!-- Notifications -->
                 <ul class="list-inline mb-0 h-100 d-none d-xl-flex justify-content-end align-items-center">
@@ -367,7 +367,7 @@
                                     </a>
                                 </li>
                                 @endif
-                                <!-- <li class="user-top-nav-element border border-top-0" data-id="1">
+                                <li class="user-top-nav-element border border-top-0" data-id="1">
                                     <a href="{{ route('support_ticket.index') }}" class="text-truncate text-dark px-4 fs-14 d-flex align-items-center hov-column-gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16.001" viewBox="0 0 16 16.001">
                                             <g id="Group_25259" data-name="Group 25259" transform="translate(-316 -1066)">
@@ -377,7 +377,7 @@
                                         </svg>
                                         <span class="user-top-menu-name has-transition ml-3">{{ translate('Support Ticket') }}</span>
                                     </a>
-                                </li> -->
+                                </li>
                             @endif
                             <li class="user-top-nav-element border border-top-0" data-id="1">
                                 <a href="{{ route('logout') }}" class="text-truncate text-dark px-4 fs-14 d-flex align-items-center hov-column-gap-1">
@@ -431,13 +431,6 @@
                                     </a>
                                 </li>
                                 @endforeach
-                                <li class="list-inline-item mr-0 animate-underline-white" style="border-radius:20px;background-color:#40916c;">
-                                    <a href="{{ route('shops.create') }}" 
-                                        class="fs-13 px-3 py-3 d-inline-block fw-700 text-white header_menu_links hov-bg-black-10
-                                        @if (url()->current() == json_decode( get_setting('header_menu_links'), true)[$key]) active @endif">
-                                        {{ translate("Become A Seller") }}
-                                    </a>
-                                </li>
                             @endif
                         </ul>
                     </div>
@@ -510,14 +503,6 @@
                     </a>
                 </li>
                 @endforeach
-                <li class="mr-0" style="border-radius:20px;background-color:#40916c;">
-                    <a href="{{ route('shops.create') }}" 
-                        class="fs-13 px-3 py-3 w-100 d-inline-block fw-700 text-dark header_menu_links
-                        @if (url()->current() == json_decode( get_setting('header_menu_links'), true)[$key]) active @endif">
-                        {{ translate("Become A Seller") }}
-                    </a>
-                </li>
-                
             @endif
             @auth
                 @if(isAdmin())
@@ -529,24 +514,24 @@
                         </a>
                     </li>
                 @else
-                    <!-- <hr>
+                    <hr>
                     <li class="mr-0">
                         <a href="{{ route('dashboard') }}" 
                             class="fs-13 px-3 py-3 w-100 d-inline-block fw-700 text-dark header_menu_links
                             {{ areActiveRoutes(['dashboard'],' active')}}">
                             {{ translate('My Account') }}
                         </a>
-                    </li> -->
+                    </li>
                 @endif
                 @if(isCustomer())
-                    <!-- <li class="mr-0">
+                    <li class="mr-0">
                         <a href="{{ route('all-notifications') }}" 
                             class="fs-13 px-3 py-3 w-100 d-inline-block fw-700 text-dark header_menu_links
                             {{ areActiveRoutes(['all-notifications'],' active')}}">
                             {{ translate('Notifications') }}
                         </a>
-                    </li> -->
-                    <!-- <li class="mr-0">
+                    </li>
+                    <li class="mr-0">
                         <a href="{{ route('wishlists.index') }}" 
                             class="fs-13 px-3 py-3 w-100 d-inline-block fw-700 text-dark header_menu_links
                             {{ areActiveRoutes(['wishlists.index'],' active')}}">
@@ -559,15 +544,15 @@
                             {{ areActiveRoutes(['compare'],' active')}}">
                             {{ translate('Compare') }}
                         </a>
-                    </li> -->
+                    </li>
                 @endif
                 <hr>
-                <!-- <li class="mr-0">
+                <li class="mr-0">
                     <a href="{{ route('logout') }}" 
                         class="fs-13 px-3 py-3 w-100 d-inline-block fw-700 text-primary header_menu_links">
                         {{ translate('Logout') }}
                     </a>
-                </li> -->
+                </li>
             @endauth
         </ul>
         <br>

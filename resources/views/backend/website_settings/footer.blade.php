@@ -139,15 +139,21 @@
     									<input type="hidden" name="types[]" value="widget_one_links">
     									@if (get_setting('widget_one_labels',null,$lang) != null)
     										@foreach (json_decode(get_setting('widget_one_labels',null,$lang), true) as $key => $value)
+                                                @php
+													$widget_one_links = '';
+													if(isset(json_decode(get_setting('widget_one_links'), true)[$key])) {
+														$widget_one_links = json_decode(get_setting('widget_one_links'), true)[$key];
+													}
+												@endphp
     											<div class="row gutters-5">
     												<div class="col-4">
     													<div class="form-group">
-    														<input type="text" class="form-control" placeholder="{{translate('Label')}}" name="widget_one_labels[]" value="{{ $value }}">
+    														<input type="text" class="form-control" placeholder="{{ translate('Label') }}" name="widget_one_labels[]" value="{{ $value }}">
     													</div>
     												</div>
     												<div class="col">
     													<div class="form-group">
-    														<input type="text" class="form-control" placeholder="http://" name="widget_one_links[]" value="{{ json_decode(get_setting('widget_one_links'), true)[$key] }}">
+    														<input type="text" class="form-control" placeholder="http://" name="widget_one_links[]" value="{{ $widget_one_links }}">
     													</div>
     												</div>
     												<div class="col-auto">

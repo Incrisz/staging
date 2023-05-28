@@ -27,6 +27,8 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
     Route::get('auction/products/{id}', [AuctionProductController::class, 'details_auction_product']);
     Route::post('auction/place-bid', [AuctionProductBidController::class, 'store'])->middleware('auth:sanctum');
 
+    // varient price
+    // Route::get('varient-price', [ProductController::class, 'getPrice']);
 
     Route::prefix('delivery-boy')->group(function () {
         Route::get('dashboard-summary/{id}', 'App\Http\Controllers\Api\V2\DeliveryBoyController@dashboard_summary')->middleware('auth:sanctum');
@@ -213,7 +215,7 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
 
     Route::get('products/featured-from-seller/{id}', 'App\Http\Controllers\Api\V2\ProductController@newFromSeller')->name('products.featuredromSeller');
     Route::get('products/search', 'App\Http\Controllers\Api\V2\ProductController@search');
-    Route::get('products/variant/price', 'App\Http\Controllers\Api\V2\ProductController@variantPrice');
+    Route::get('products/variant/price', 'App\Http\Controllers\Api\V2\ProductController@getPrice');
     // Route::get('products/home', 'App\Http\Controllers\Api\V2\ProductController@home');
     Route::get('products/digital', 'App\Http\Controllers\Api\V2\ProductController@digital')->name('products.digital');
     Route::apiResource('products', 'App\Http\Controllers\Api\V2\ProductController')->except(['store', 'update', 'destroy']);
@@ -274,9 +276,9 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
     Route::any('paypal/payment/url', 'App\Http\Controllers\Api\V2\PaypalController@getUrl')->name('api.paypal.url');
     Route::any('paypal/payment/done', 'App\Http\Controllers\Api\V2\PaypalController@getDone')->name('api.paypal.done');
     Route::any('paypal/payment/cancel', 'App\Http\Controllers\Api\V2\PaypalController@getCancel')->name('api.paypal.cancel');
-    
+
     Route::any('khalti/payment/pay', 'App\Http\Controllers\Api\V2\KhaltiController@pay')->name('api.khalti.url');
-    Route::any('khalti/payment/success', 'App\Http\Controllers\Api\V2\KhaltiController@getDone')->name('api.khalti.success');
+    Route::any('khalti/payment/success', 'App\Http\Controllers\Api\V2\KhaltiController@paymentDone')->name('api.khalti.success');
     Route::any('khalti/payment/cancel', 'App\Http\Controllers\Api\V2\KhaltiController@getCancel')->name('api.khalti.cancel');
 
     Route::any('razorpay/pay-with-razorpay', 'App\Http\Controllers\Api\V2\RazorpayController@payWithRazorpay')->name('api.razorpay.payment');
@@ -333,10 +335,9 @@ Route::group(['prefix' => 'v2', 'middleware' => ['app_language']], function () {
     //Pickup Point list
     Route::get('pickup-list', 'App\Http\Controllers\Api\V2\ShippingController@pickup_list');
 
-    Route::get('google-recaptcha', function(){
+    Route::get('google-recaptcha', function () {
         return view("frontend.google_recaptcha.app_recaptcha");
     });
-
 });
 
 Route::fallback(function () {

@@ -9,11 +9,11 @@
             </div>
             <div class="col-lg-6">
                 <ul class="breadcrumb bg-transparent p-0 justify-content-center justify-content-lg-end">
-                    <li class="breadcrumb-item opacity-50">
+                    <li class="breadcrumb-item has-transition opacity-50 hov-opacity-100">
                         <a class="text-reset" href="{{ route('home') }}">{{ translate('Home')}}</a>
                     </li>
                     <li class="text-dark fw-600 breadcrumb-item">
-                        <a class="text-dark" href="{{ route('shops.create') }}">"{{ translate('Register your shop')}}"</a>
+                        "{{ translate('Register your shop')}}"
                     </li>
                 </ul>
             </div>

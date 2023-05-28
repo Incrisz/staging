@@ -311,7 +311,7 @@
                                                             </div>
                                                             <!-- Carrier -->
                                                             @else
-                                                            <div class="col-6" >
+                                                            <div class="col-6">
                                                                 <label class="aiz-megabox d-block bg-white mb-0">
                                                                     <input
                                                                         type="radio"
@@ -319,11 +319,11 @@
                                                                         value="carrier"
                                                                         onchange="show_pickup_point(this, {{ $key }})"
                                                                         data-target=".pickup_point_id_{{ $key }}"
-                                                                        
+                                                                        checked
                                                                     >
                                                                     <span class="d-flex p-3 aiz-megabox-elem rounded-0" style="padding: 0.75rem 1.2rem;">
                                                                         <span class="aiz-rounded-check flex-shrink-0 mt-1"></span>
-                                                                        <span class="flex-grow-1 pl-3 fw-600">{{  translate('Shipping Carrier') }}</span>
+                                                                        <span class="flex-grow-1 pl-3 fw-600">{{  translate('Carrier') }}</span>
                                                                     </span>
                                                                 </label>
                                                             </div>

@@ -66,7 +66,7 @@ Route::controller(UpdateController::class)->group(function () {
     Route::post('/purchase_code', 'purchase_code')->name('update.code');
 });
 
-Route::get('/backend', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard')->middleware(['auth', 'admin', 'prevent-back-history']);
+Route::get('/admin', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard')->middleware(['auth', 'admin', 'prevent-back-history']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'prevent-back-history']], function() {
     
     // category

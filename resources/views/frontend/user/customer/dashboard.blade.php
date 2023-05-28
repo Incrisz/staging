@@ -120,7 +120,7 @@
                 </div>
 
                 <!-- Wishlist summary -->
-                <!-- <div class="d-flex align-items-center py-4 border-bottom">
+                <div class="d-flex align-items-center py-4 border-bottom">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
                         <g id="Group_25000" data-name="Group 25000" transform="translate(-1367 -499)">
                         <path id="Path_32309" data-name="Path 32309" d="M24,0A24,24,0,1,1,0,24,24,24,0,0,1,24,0Z" transform="translate(1367 499)" fill="#3490f3"/>
@@ -140,7 +140,7 @@
                         <span class="fs-20 fw-700 mb-1">{{ count(Auth::user()->wishlists) > 0 ? sprintf("%02d", count(Auth::user()->wishlists)) : 0 }}</span>
                         <span class="fs-14 fw-400 text-secondary">{{ translate('Products in Wishlist') }}</span>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Order summary -->
                 <div class="d-flex align-items-center py-4">
@@ -233,7 +233,7 @@
         $wishlists = \App\Models\Wishlist::where('user_id', Auth::user()->id)->get();
     @endphp
     @if (count($wishlists) > 0)
-        <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 gutters-16 border-top border-left mx-1 mx-md-0 mb-4" style="display:none">
+        <div class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 gutters-16 border-top border-left mx-1 mx-md-0 mb-4">
             @foreach($wishlists->take(5) as $key => $wishlist)
                 @if ($wishlist->product != null)
                     <div class="aiz-card-box col py-3 text-center border-right border-bottom has-transition hov-shadow-out z-1" id="wishlist_{{ $wishlist->id }}">

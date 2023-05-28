@@ -66,34 +66,34 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">{{ translate('Unit') }}</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" name="unit"
-                                    placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" value="pc"  required>
+                                    placeholder="{{ translate('Unit (e.g. KG, Pc etc)') }}" required>
                             </div>
                         </div>
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">{{ translate('Weight') }}
                                 <small>({{ translate('In Kg') }})</small></label>
                             <div class="col-md-8">
                                 <input type="number" class="form-control" name="weight" step="0.01" value="0.00"
-                                    placeholder="0.00" >
+                                    placeholder="0.00">
                             </div>
                         </div>
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">{{ translate('Minimum Purchase Qty') }}</label>
                             <div class="col-md-8">
                                 <input type="number" lang="en" class="form-control" name="min_qty" value="1"
-                                    min="1"  required>
+                                    min="1" required>
                             </div>
                         </div>
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">{{ translate('Tags') }}</label>
                             <div class="col-md-8">
                                 <input type="text" class="form-control aiz-tag-input" name="tags[]"
-                                    placeholder="{{ translate('Type and hit enter to add a tag') }}" >
-                            </div> 
+                                    placeholder="{{ translate('Type and hit enter to add a tag') }}">
+                            </div>
                         </div>
                         @if (addon_is_activated('pos_system'))
                             <div class="form-group row">
@@ -105,7 +105,7 @@
                             </div>
                         @endif
                         @if (addon_is_activated('refund_request'))
-                            <div class="form-group row" style="display:none;">
+                            <div class="form-group row">
                                 <label class="col-md-3 col-from-label">{{ translate('Refundable') }}</label>
                                 <div class="col-md-8">
                                     <label class="aiz-switch aiz-switch-success mb-0">
@@ -124,7 +124,7 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"
-                                for="signinSrEmail">{{ translate('Add Multiple Images') }}</label>
+                                for="signinSrEmail">{{ translate('Gallery Images') }}</label>
                             <div class="col-md-8">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image"
                                     data-multiple="true">
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{ translate('Main Image') }}
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">{{ translate('Thumbnail Image') }}
                                 <small>(290x300)</small></label>
                             <div class="col-md-8">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('Product Videos') }}</h5>
                     </div>
@@ -181,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('Product Variation') }}</h5>
                     </div>
@@ -242,15 +242,15 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-md-3 col-from-label">{{ translate('Product price') }}</label>
+                            <label class="col-md-3 col-from-label">{{ translate('Unit price') }}</label>
                             <div class="col-md-6">
                                 <input type="number" lang="en" min="0" value="0" step="0.01"
-                                    placeholder="{{ translate('Product price') }}" name="unit_price" class="form-control"
+                                    placeholder="{{ translate('Unit price') }}" name="unit_price" class="form-control"
                                     required>
                             </div>
                         </div>
 
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 control-label"
                                 for="start_date">{{ translate('Discount Date Range') }}</label>
                             <div class="col-md-9">
@@ -260,7 +260,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" style="display: none;">
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">{{ translate('Discount') }}</label>
                             <div class="col-md-6">
                                 <input type="number" lang="en" min="0" value="0" step="0.01"
@@ -277,14 +277,14 @@
 
                         <div id="show-hide-div">
                             <div class="form-group row">
-                                <label class="col-md-3 col-from-label">{{ translate('Product Quantity') }}</label>
+                                <label class="col-md-3 col-from-label">{{ translate('Quantity') }}</label>
                                 <div class="col-md-6">
                                     <input type="number" lang="en" min="0" value="0" step="1"
                                         placeholder="{{ translate('Quantity') }}" name="current_stock"
                                         class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-group row" style="display: none;">
+                            <div class="form-group row">
                                 <label class="col-md-3 col-from-label">
                                     {{ translate('SKU') }}
                                 </label>
@@ -294,18 +294,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row" >
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">
-                                {{ translate('School Name') }}
+                                {{ translate('External link') }}
                             </label>
                             <div class="col-md-9">
-                                <input type="text" placeholder="{{ translate('e.g. futmx') }}"
-                                    name="external_link" maxlength="8" class="form-control">
+                                <input type="text" placeholder="{{ translate('External link') }}"
+                                    name="external_link" class="form-control">
                                 <small
-                                    class="text-muted">{{ translate('Leave it blank if you are not a student') }}</small>
+                                    class="text-muted">{{ translate('Leave it blank if you do not use external site link') }}</small>
                             </div>
                         </div>
-                        <div class="form-group row" style="display: none;" >
+                        <div class="form-group row">
                             <label class="col-md-3 col-from-label">
                                 {{ translate('External link button text') }}
                             </label>
@@ -336,7 +336,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('PDF Specification') }}</h5>
                     </div>
@@ -359,7 +359,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('SEO Meta Tags') }}</h5>
                     </div>
@@ -438,14 +438,14 @@
                                 </div>
                             </div>
                         @else
-                            <p> 
+                            <p>
                                 {{ translate('Shipping configuration is maintained by Admin.') }}
                             </p>
                         @endif
                     </div>
                 </div>
 
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('Low Stock Quantity Warning') }}</h5>
                     </div>
@@ -460,7 +460,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">
                             {{ translate('Stock Visibility State') }}
@@ -502,7 +502,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('Cash On Delivery') }}</h5>
                     </div>
@@ -545,7 +545,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="display: none;">
+                <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0 h6">{{ translate('VAT & Tax') }}</h5>
                     </div>

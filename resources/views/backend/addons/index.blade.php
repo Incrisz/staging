@@ -11,8 +11,8 @@
                 </div>
             </div>
 			<div class="col mt-3 mt-sm-0 text-center text-md-right">
-                <a href="https://cyfamod.com/" class="btn btn-primary" target="_blank">
-					{{ translate('Company Link') }}
+                <a href="https://activeitzone.com/activation/addon" class="btn btn-primary" target="_blank">
+					{{ translate('Activate Addon Link') }}
 				</a>
             </div>
             <div class="col-auto mt-3 mt-sm-0 text-center text-md-right">
@@ -97,7 +97,7 @@
         }
 
         $(document).ready(function(){
-            $.post('#', {item: 'ecommerce'}, function(data){
+            $.post('https://activeitzone.com/addons/public/addons', {item: 'ecommerce'}, function(data){
                 //console.log(data);
                 html = '';
                 data.forEach((item, i) => {

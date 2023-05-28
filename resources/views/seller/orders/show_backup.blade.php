@@ -27,7 +27,7 @@ $payment_status = $order->orderDetails->where('seller_id', Auth::user()->id)->fi
                     </div>
                 </div>
             @endif
-            <div class="col-lg-4 col-sm-6" style="display:none;">
+            <div class="col-lg-4 col-sm-6">
                 <div class="form-group">
                     <select class="form-control aiz-selectpicker form-control-sm"
                         data-minimum-results-for-search="Infinity" id="update_delivery_status">

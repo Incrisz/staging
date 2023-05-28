@@ -9,10 +9,6 @@
                     @include('frontend.partials.category_menu')
                 </div>
 
-                @php
-                    $num_todays_deal = count($todays_deal_products);
-                @endphp
-
                 <!-- Sliders -->
                 <div class="home-slider">
                     @if (get_setting('home_slider_images') != null)
@@ -135,7 +131,7 @@
     @endif
 
     <!-- Today's deal -->
-    @if($num_todays_deal > 0)
+    @if(count($todays_deal_products) > 0)
     <section class="mb-2 mb-md-3 mt-2 mt-md-3">
         <div class="container">
             <!-- Banner -->
@@ -236,34 +232,6 @@
                             <a class="text-blue fs-10 fs-md-12 fw-700 hov-text-primary animate-underline-primary" href="{{ route('categories.all') }}">{{ translate('View All Categories') }}</a>
                         </div>
                     </div>
-                    {{-- <div class="row no-gutters border-top border-left">
-                        @foreach ($featured_categories as $key => $category)
-                            <div class="col-xl-4 col-md-6 border-right border-bottom">
-                                <div class="bg-white pt-3 pl-3 pr-3 h-100 hov-scale-img" style="min-height: 240px !important;">
-                                    <div class="row">
-                                        <!-- Category Banner -->
-                                        <div class="col-md-5 py-3 h-200px h-md-100 text-center">
-                                            <img src="{{ uploaded_asset($category->banner) }}" alt="{{ $category->getTranslation('name') }}" class="mw-100 mh-100 has-transition"  
-                                            onerror="this.onerror=null;this.src='{{ static_asset('assets/img/placeholder.jpg') }}';">
-                                        </div>
-                                        <!-- Categories -->
-                                        <div class="col py-3 text-center text-md-left">
-                                            <!-- Category Name -->
-                                            <h6 class="text-dark mb-3"><a class="text-reset fw-700 fs-14 hov-text-primary" href="{{ route('products.category', $category->slug) }}">{{ $category->getTranslation('name') }}</a></h6>
-                                            <!-- Sub Categories -->
-                                            <ul class="mb-3 list-unstyled">
-                                                @foreach (array_slice(\App\Utility\CategoryUtility::get_immediate_children_ids($category->id), 0, 5, true) as $key => $first_level_id)
-                                                <li class="text-dark mb-2">
-                                                    <a class="text-reset fw-400 fs-14 hov-text-primary animate-underline-primary" href="{{ route('products.category', \App\Models\Category::find($first_level_id)->slug) }}" >{{ \App\Models\Category::find($first_level_id)->getTranslation('name') }}</a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div> --}}
                 </div>
                 <!-- Categories -->
                 <div class="bg-white px-sm-3">
@@ -309,7 +277,6 @@
 
     <!-- Best Selling  -->
     <div id="section_best_selling">
-    @include('frontend.partials.best_selling_section')
 
     </div>
 
@@ -514,7 +481,7 @@
         });   
     @endphp
     @if (get_setting('vendor_system_activation') == 1)
-        <section class="mb-2 mb-md-3 mt-2 mt-md-3" style="display:none">
+        <section class="mb-2 mb-md-3 mt-2 mt-md-3">
             <div class="container">
                 <!-- Top Section -->
                 <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">
@@ -592,7 +559,7 @@
     
     <!-- Top Brands -->
     @if (get_setting('top_brands') != null)
-        <section class="mb-2 mb-md-3 mt-2 mt-md-3" style="display:none">
+        <section class="mb-2 mb-md-3 mt-2 mt-md-3">
             <div class="container">
                 <!-- Top Section -->
                 <div class="d-flex mb-2 mb-md-3 align-items-baseline justify-content-between">

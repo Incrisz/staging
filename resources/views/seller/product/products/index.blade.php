@@ -35,16 +35,6 @@
               </div>
             </a>
         </div>
-        <div class="col-md-4 mx-auto mb-3" >
-            <a href="{{ route('seller.services.create')}}">
-              <div class="p-3 rounded mb-3 c-pointer text-center bg-white shadow-sm hov-shadow-lg has-transition">
-                  <span class="size-60px rounded-circle mx-auto bg-secondary d-flex align-items-center justify-content-center mb-3">
-                      <i class="las la-plus la-3x text-white"></i>
-                  </span>
-                  <div class="fs-18 text-primary">{{ translate('Add New Service(Skills etc)') }}</div>
-              </div>
-            </a>
-        </div>
 
         @if (addon_is_activated('seller_subscription'))
         @php
@@ -88,8 +78,6 @@
                         <th data-breakpoints="md">{{ translate('Category')}}</th>
                         <th data-breakpoints="md">{{ translate('Current Qty')}}</th>
                         <th>{{ translate('Base Price')}}</th>
-
-                        <th>{{ translate('Uploaded')}}</th>
                         @if(get_setting('product_approve_by_admin') == 1)
                             <th data-breakpoints="md">{{ translate('Approval')}}</th>
                         @endif
@@ -113,10 +101,6 @@
                                     {{ $product->category->getTranslation('name') }}
                                 @endif
                             </td>
-
-                            @if($product->external_link_btn  == 'services')
-                            <td></td>
-                            @else
                             <td>
                                 @php
                                     $qty = 0;
@@ -126,14 +110,7 @@
                                     echo $qty;
                                 @endphp
                             </td>
-                            @endif
                             <td>{{ $product->unit_price }}</td>
-                            @if($product->external_link_btn  == 'services')
-                             <td>{{ translate('Service')}}</td>
-
-                            @else
-                            <td>{{ translate('product')}}</td>
-                            @endif
                             @if(get_setting('product_approve_by_admin') == 1)
                                 <td>
                                     @if ($product->approved == 1)
@@ -156,21 +133,12 @@
                                 </label>
                             </td>
                             <td class="text-right">
-
-                            @if($product->external_link_btn  == 'services')
-                            <a class="btn btn-soft-info btn-icon btn-circle btn-sm" href="{{route('seller.services.edit', ['id'=>$product->id, 'lang'=>env('DEFAULT_LANGUAGE')])}}" title="{{ translate('Edit') }}">
+		                      <a class="btn btn-soft-info btn-icon btn-circle btn-sm" href="{{route('seller.products.edit', ['id'=>$product->id, 'lang'=>env('DEFAULT_LANGUAGE')])}}" title="{{ translate('Edit') }}">
 		                          <i class="las la-edit"></i>
 		                      </a>
-
-                            @else
-                            <a class="btn btn-soft-info btn-icon btn-circle btn-sm" href="{{route('seller.products.edit', ['id'=>$product->id, 'lang'=>env('DEFAULT_LANGUAGE')])}}" title="{{ translate('Edit') }}">
-		                          <i class="las la-edit"></i>
-		                      </a>
-                            @endif
-		                     
-                              <!-- <a href="{{route('seller.products.duplicate', $product->id)}}" class="btn btn-soft-success btn-icon btn-circle btn-sm"  title="{{ translate('Duplicate') }}">
+                              <a href="{{route('seller.products.duplicate', $product->id)}}" class="btn btn-soft-success btn-icon btn-circle btn-sm"  title="{{ translate('Duplicate') }}">
     							   <i class="las la-copy"></i>
-    						  </a> -->
+    						  </a>
                               <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{route('seller.products.destroy', $product->id)}}" title="{{ translate('Delete') }}">
                                   <i class="las la-trash"></i>
                               </a>

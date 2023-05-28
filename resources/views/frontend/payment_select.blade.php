@@ -73,25 +73,12 @@
                                     {{ translate('Select a payment option') }}
                                 </h3>
                             </div>
-
-                              <!-- Agree Box -->
-                              <div class="pt-3 px-4 fs-14">
-                                <label class="aiz-checkbox">
-                                    <input type="checkbox" required id="agree_checkbox">
-                                    <span class="aiz-square-check"></span>
-                                    <span>{{ translate('I agree to the') }}</span>
-                                </label>
-                                <a href="{{ route('terms') }}" class="fw-700">{{ translate('terms and conditions') }}</a>,
-                                <a href="{{ route('returnpolicy') }}" class="fw-700">{{ translate('return policy') }}</a> &
-                                <a href="{{ route('privacypolicy') }}" class="fw-700">{{ translate('privacy policy') }}</a>
-                            </div>
-
                             <!-- Payment Options -->
                             <div class="card-body text-center px-4 pt-0">
                                 <div class="row gutters-10">
                                     <!-- Paypal -->
                                     @if (get_setting('paypal_payment') == 1)
-                                        <div class="col-6 col-xl-3 col-md-4" style="display:none">
+                                        <div class="col-6 col-xl-3 col-md-4">
                                             <label class="aiz-megabox d-block mb-3">
                                                 <input value="paypal" class="online_payment" type="radio"
                                                     name="payment_option" checked>
@@ -193,7 +180,7 @@
                                     @endif
                                     <!-- paystack -->
                                     @if (get_setting('paystack') == 1)
-                                        <div class="col-6 col-xl-3 col-md-4" style="display:none">
+                                        <div class="col-6 col-xl-3 col-md-4">
                                             <label class="aiz-megabox d-block mb-3">
                                                 <input value="paystack" class="online_payment" type="radio"
                                                     name="payment_option" checked>
@@ -584,17 +571,13 @@
                                 @if (Auth::check() && get_setting('wallet_system') == 1)
                                     <div class="py-4 px-4 text-center bg-soft-warning mt-4">
                                         <div class="fs-14 mb-3">
-                                            <span class="opacity-80">{{ translate('Your wallet balance :') }}</span>
+                                            <span class="opacity-80">{{ translate('Or, Your wallet balance :') }}</span>
                                             <span class="fw-700">{{ single_price(Auth::user()->balance) }}</span>
                                         </div>
                                         @if (Auth::user()->balance < $total)
-                                            <button type="button" class="btn btn-primary" disabled>
+                                            <button type="button" class="btn btn-secondary" disabled>
                                                 {{ translate('Insufficient balance') }}
                                             </button>
-                                            <br>
-                                            <a href="{{ route('wallet.index') }}"><button type="button" class="btn btn-secondary" >
-                                              {{ translate('Fund Wallet') }}
-                                            </button> </a>
                                         @else
                                             <button type="button" onclick="use_wallet()" class="btn btn-primary fs-14 fw-700 px-5 rounded-0">
                                                 {{ translate('Pay with wallet') }}
@@ -604,7 +587,18 @@
                                 @endif
                             </div>
 
-                          
+                            <!-- Agree Box -->
+                            <div class="pt-3 px-4 fs-14">
+                                <label class="aiz-checkbox">
+                                    <input type="checkbox" required id="agree_checkbox">
+                                    <span class="aiz-square-check"></span>
+                                    <span>{{ translate('I agree to the') }}</span>
+                                </label>
+                                <a href="{{ route('terms') }}" class="fw-700">{{ translate('terms and conditions') }}</a>,
+                                <a href="{{ route('returnpolicy') }}" class="fw-700">{{ translate('return policy') }}</a> &
+                                <a href="{{ route('privacypolicy') }}" class="fw-700">{{ translate('privacy policy') }}</a>
+                            </div>
+
                             <div class="row align-items-center pt-3 px-4 mb-4">
                                 <!-- Return to shop -->
                                 <div class="col-6">
@@ -613,8 +607,11 @@
                                         {{ translate('Return to shop') }}
                                     </a>
                                 </div>
-                                <!-- Complete Order -->
-                              
+                                <!-- Complete Ordert -->
+                                <div class="col-6 text-right">
+                                    <button type="button" onclick="submitOrder(this)"
+                                        class="btn btn-primary fs-14 fw-700 rounded-0 px-4">{{ translate('Complete Order') }}</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -665,10 +662,8 @@
                         '{{ translate('You order amount is less then the minimum order amount') }}');
                 } else {
                     var offline_payment_active = '{{ addon_is_activated('offline_payment') }}';
-                    if (offline_payment_active == 'true' && $('.offline_payment_option').is(":checked") && $('#trx_id')
-                        .val() == '') {
-                        AIZ.plugins.notify('danger',
-                            '{{ translate('You need to put Transaction id') }}');
+                    if (offline_payment_active == '1' && $('.offline_payment_option').is(":checked") && $('#trx_id').val() == '') {
+                        AIZ.plugins.notify('danger', '{{ translate('You need to put Transaction id') }}');
                         $(el).prop('disabled', false);
                     } else {
                         $('#checkout-form').submit();
