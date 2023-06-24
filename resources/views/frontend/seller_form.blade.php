@@ -27,46 +27,45 @@
                 <h1 class="fw-700 fs-20 fs-md-24 text-dark text-center mb-3">{{ translate('Register Your Shop')}}</h1>
                 <form id="shop" class="" action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @if (!Auth::check())
-                        <div class="bg-white border mb-4">
-                            <div class="fs-15 fw-600 p-3">
-                                {{ translate('Personal Info')}}
+                    <div class="bg-white border mb-4">
+                        <div class="fs-15 fw-600 p-3">
+                            {{ translate('Personal Info')}}
+                        </div>
+                        <div class="p-3">
+                            <div class="form-group">
+                                <label>{{ translate('Your Name')}} <span class="text-primary">*</span></label>
+                                <input type="text" class="form-control rounded-0{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="{{  translate('Name') }}" name="name" required>
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <div class="p-3">
-                                <div class="form-group">
-                                    <label>{{ translate('Your Name')}} <span class="text-primary">*</span></label>
-                                    <input type="text" class="form-control rounded-0{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" placeholder="{{  translate('Name') }}" name="name">
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>{{ translate('Your Email')}} <span class="text-primary">*</span></label>
-                                    <input type="email" class="form-control rounded-0{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{  translate('Email') }}" name="email">
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>{{ translate('Your Password')}} <span class="text-primary">*</span></label>
-                                    <input type="password" class="form-control rounded-0{{ $errors->has('password') ? ' is-invalid' : '' }}" value="{{ old('password') }}" placeholder="{{  translate('Password') }}" name="password">
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label>{{ translate('Repeat Password')}} <span class="text-primary">*</span></label>
-                                    <input type="password" class="form-control rounded-0" placeholder="{{  translate('Confirm Password') }}" name="password_confirmation">
-                                </div>
+                            <div class="form-group">
+                                <label>{{ translate('Your Email')}} <span class="text-primary">*</span></label>
+                                <input type="email" class="form-control rounded-0{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{  translate('Email') }}" name="email" required>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>{{ translate('Your Password')}} <span class="text-primary">*</span></label>
+                                <input type="password" class="form-control rounded-0{{ $errors->has('password') ? ' is-invalid' : '' }}" value="{{ old('password') }}" placeholder="{{  translate('Password') }}" name="password" required>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>{{ translate('Repeat Password')}} <span class="text-primary">*</span></label>
+                                <input type="password" class="form-control rounded-0" placeholder="{{  translate('Confirm Password') }}" name="password_confirmation" required>
                             </div>
                         </div>
-                    @endif
+                    </div>
+
                     <div class="bg-white border mb-4">
                         <div class="fs-15 fw-600 p-3">
                             {{ translate('Basic Info')}}

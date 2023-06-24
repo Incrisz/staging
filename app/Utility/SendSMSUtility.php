@@ -186,42 +186,77 @@ class SendSMSUtility
             $response = curl_exec($ch);
             curl_close($ch);
             return $response;
-        }elseif (OtpConfiguration::where('type', 'sparrow')->first()->value == 1) {
-            $url = "http://api.sparrowsms.com/v2/sms/";  
+        } elseif (OtpConfiguration::where('type', 'sparrow')->first()->value == 1) {
+            $url = "http://api.sparrowsms.com/v2/sms/";
 
             $args = http_build_query(array(
-                "token" => env('SPARROW_TOKEN'),                
+                "token" => env('SPARROW_TOKEN'),
                 "from" => env('MESSGAE_FROM'),
                 "to" => $to,
-                "text" => $text));
+                "text" => $text
+            ));
             # Make the call using API.
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                // Response
-                $response = curl_exec($ch);
-                curl_close($ch);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            // Response
+            $response = curl_exec($ch);
+            curl_close($ch);
             return $response;
-        }elseif (OtpConfiguration::where('type', 'zender')->first()->value == 1) {
-            
-             $args = [
-                "secret" => env('ZENDER_API_SECRET'),
-                "phone" => $to,
-                "message" => $text,            
-                "mode" => env('ZENDER_MODE'),
-                "sim" => env('ZENDER_SIM'),
-                env('ZENDER_MODE_TYPE') => env('ZENDER_DEVICE_ID'),
-            ];
+        } elseif (OtpConfiguration::where('type', 'zender')->first()->value == 1) {
+            if (empty(env('ZENDER_SERVICE')) || env('ZENDER_SERVICE') < 2) {
+                if (!empty(env('ZENDER_DEVICE'))) {
+                    $mode = "devices";
+                } else {
+                    $mode = "credits";
+                }
 
-            $cURL = curl_init("https://sms.dzshopee.com/api/send/sms");
-            curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($cURL, CURLOPT_POSTFIELDS, $args);
-            $response = curl_exec($cURL);
-            curl_close($cURL);
+                if ($mode == "devices") {
+                    $params = [
+                        "secret" => env('ZENDER_APIKEY'),
+                        "mode" => "devices",
+                        "device" => env('ZENDER_DEVICE'),
+                        "phone" => $to,
+                        "message" => $text,
+                        "sim" => env('ZENDER_SIM') < 2 ? 1 : 2
+                    ];
+                } else {
+                    $params = [
+                        "secret" => env('ZENDER_APIKEY'),
+                        "mode" => "credits",
+                        "gateway" => env('ZENDER_GATEWAY'),
+                        "phone" => $to,
+                        "message" => $text
+                    ];
+                }
+
+                $apiurl = env('ZENDER_SITEURL') . "/api/send/sms";
+            } else {
+                $params = [
+                    "secret" => env('ZENDER_APIKEY'),
+                    "account" => env('ZENDER_WHATSAPP'),
+                    "type" => "text",
+                    "recipient" => $to,
+                    "message" => $text
+                ];
+
+                $apiurl = env('ZENDER_SITEURL') . "/api/send/whatsapp";
+            }
+
+            $args = http_build_query($params);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $apiurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            // Response
+            $response = curl_exec($ch);
+            curl_close($ch);
+
             return $response;
-            
         }
         return true;
     }

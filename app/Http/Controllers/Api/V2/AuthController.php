@@ -88,11 +88,13 @@ class AuthController extends Controller
 
         //create token
         $user->createToken('tokens')->plainTextToken;
-
+        
         return response()->json([
             'result' => true,
-            'message' => translate('Registration Successful. Please verify and log in to your account.'),
-            'user_id'=>$user->id
+            'message' => get_setting('email_verification') == 1 ?
+                translate('Registration Successful! Please verify and log in to your account.') :
+                translate('Registration Successful! Please log in to your account.'),
+            'user_id' => $user->id
         ], 201);
     }
 
@@ -273,7 +275,7 @@ class AuthController extends Controller
 
             $existing_or_new_user->user_type = 'customer';
             $existing_or_new_user->provider_id = $social_user_details->id;
-            $existing_or_new_user->provider = $request->social_provider;
+
             if (!$existing_or_new_user->exists) {
                 if ($request->social_provider == 'apple') {
                     if ($request->name) {
